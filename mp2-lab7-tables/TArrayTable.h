@@ -4,28 +4,40 @@
 
 using namespace std;
 
-class TArrayTable : TTable
+class TArrayTable : public TTable
 {
 protected:
-	TRecord* mas;
+	TRecord* arr;
 	int size, curr;
 public:
 	TArrayTable(int _size = 10)
 	{
-		mas = new TRecord[_size];
+		arr = new TRecord[_size];
 		size = _size;
 		curr = -1;
 	}
-	virtual bool IsFull()
+	void GoNext() 
+	{ 
+		curr++; 
+	}
+	void Reset() 
+	{
+		curr = 0;
+	}
+	bool IsEnd()
+	{
+		size == DataCount; 
+	}
+	bool IsFull()
 	{
 		return DataCount >= size;
 	}
-	virtual TKey GetKey(TKey key)
+	TKey GetKey(TKey key)
 	{
 		return GetKey(curr);
 	}
-	virtual TValue GetVal(TValue val)
+	TValue GetVal(TKey key)
 	{
-		//return GetVal(curr);
+		return GetVal(curr);
 	}
 	};
