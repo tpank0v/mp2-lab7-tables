@@ -6,6 +6,10 @@
 class TSortTable : public TScanTable
 {
 public:
+	//TSortTable(TScanTable& st) : TScanTable(st.GetSize())
+	//{
+
+	//}
 	bool Find(TKey key)
 	{
 		int begin = 0, end = DataCount - 1, mid;
@@ -54,4 +58,31 @@ public:
 		DataCount--;
 		return true;
 	}
+
+	void qsort(int first, int last);
 };
+void TSortTable::qsort(int first, int last)
+{
+	TKey mid = arr[(first + last) / 2].key;
+	int f = first, l = last;
+	while (f < l)
+	{
+		while (arr[f].key < mid)
+		{
+			f++; eff++;
+		}
+		while (arr[l].key > mid)
+		{
+			l--; eff++;
+		}
+		if (f <= l)
+		{
+			TRecord tmp = arr[f];
+			arr[f] = arr[l];
+			arr[l] = tmp;
+			f++; l--; eff++;
+		}
+	}
+	if (first < l) qsort(first, l);
+	if (f < last) qsort(f, last);
+}
